@@ -34,7 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PUBLIC_POST_MATCHERS = {
-            "/usuarios"
+            "/usuarios",
+            "/auth/forgot"
     };
 
     @Autowired

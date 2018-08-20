@@ -18,7 +18,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) {
-        Usuario novoUsuario = usuarioService.cadastrar(usuario);
+        Usuario novoUsuario = usuarioService.salvar(usuario);
 
         return ResponseEntity.ok(novoUsuario);
     }
