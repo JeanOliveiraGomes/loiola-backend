@@ -1,4 +1,4 @@
-package com.tecgreen.loiola.config;
+package com.tecgreen.loiola.security.config;
 
 import com.tecgreen.loiola.security.JWTAuthenticationFilter;
 import com.tecgreen.loiola.security.JWTAuthorizationFilter;
@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,15 +22,19 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/h2-console/**",
-            "/usuarios/**"
+            "/h2-console/**"
     };
 
     private static final String[] PUBLIC_GET_MATCHERS = {
             "/quartos"
+    };
+
+    private static final String[] PUBLIC_POST_MATCHERS = {
+            "/usuarios"
     };
 
     @Autowired
@@ -47,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, PUBLIC_GET_MATCHERS).permitAll()
+                .antMatchers(HttpMethod.POST, PUBLIC_POST_MATCHERS).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));

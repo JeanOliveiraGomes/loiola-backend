@@ -4,6 +4,7 @@ import com.tecgreen.loiola.entities.Quarto;
 import com.tecgreen.loiola.services.QuartoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ public class QuartoController {
         return ResponseEntity.ok(quartos);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Quarto> cadastrar(@RequestBody Quarto quarto) {
         Quarto novoQuarto = quartoService.cadastrar(quarto);
