@@ -1,13 +1,14 @@
 package com.tecgreen.loiola.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +19,19 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCheckin;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCheckout;
-    private Double subtotal;
-    private Double desconto;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @ManyToMany
-    @JoinTable(name = "reserva_quarto", joinColumns = @JoinColumn(name = "id_reserva"), inverseJoinColumns = @JoinColumn(name = "id_quarto"))
-    private List<Quarto> quartos = new ArrayList<>();
+    @OneToMany(mappedBy = "id.quarto")
+    private List<ReservaQuarto> quartos = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -55,22 +57,6 @@ public class Reserva {
         this.dataCheckout = dataCheckout;
     }
 
-    public Double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Double getDesconto() {
-        return desconto;
-    }
-
-    public void setDesconto(Double desconto) {
-        this.desconto = desconto;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -79,11 +65,11 @@ public class Reserva {
         this.usuario = usuario;
     }
 
-    public List<Quarto> getQuartos() {
+    public List<ReservaQuarto> getQuartos() {
         return quartos;
     }
 
-    public void setQuartos(List<Quarto> quartos) {
+    public void setQuartos(List<ReservaQuarto> quartos) {
         this.quartos = quartos;
     }
 }

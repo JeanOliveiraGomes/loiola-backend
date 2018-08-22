@@ -20,4 +20,8 @@ public class QuartoService {
     public Quarto cadastrar(Quarto quarto) {
         return quartoRepository.save(quarto);
     }
+
+    public Quarto buscarPorId(Long id) {
+        return quartoRepository.findById(id).orElse(null);
+    }
 }
