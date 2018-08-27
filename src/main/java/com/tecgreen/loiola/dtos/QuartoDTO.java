@@ -5,16 +5,16 @@ public class QuartoDTO {
     private Long id;
     private String descricao;
     private Double valor;
-    private Integer qtdDisponiveis;
+    private Integer quantidade;
 
     public QuartoDTO() {
     }
 
-    public QuartoDTO(Long id, String descricao, Double valor, Integer qtdDisponiveis) {
+    public QuartoDTO(Long id, String descricao, Double valor, Integer quantidade) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
-        this.qtdDisponiveis = qtdDisponiveis;
+        this.quantidade = quantidade;
     }
 
     public Long getId() {
@@ -41,11 +41,11 @@ public class QuartoDTO {
         this.valor = valor;
     }
 
-    public Integer getQtdDisponiveis() {
-        return qtdDisponiveis;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setQtdDisponiveis(Integer qtdDisponiveis) {
-        this.qtdDisponiveis = qtdDisponiveis;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 }

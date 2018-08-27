@@ -1,10 +1,12 @@
 package com.tecgreen.loiola.services;
 
+import com.tecgreen.loiola.dtos.QuartoDTO;
 import com.tecgreen.loiola.entities.Quarto;
 import com.tecgreen.loiola.repositories.QuartoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,11 +19,15 @@ public class QuartoService {
         return quartoRepository.findAll();
     }
 
-    public Quarto cadastrar(Quarto quarto) {
+    public Quarto salvar(Quarto quarto) {
         return quartoRepository.save(quarto);
     }
 
     public Quarto buscarPorId(Long id) {
         return quartoRepository.findById(id).orElse(null);
+    }
+
+    public List<QuartoDTO> buscarQuartosDisponiveis(LocalDate checkin, LocalDate checkout) {
+        return quartoRepository.findAllDisponiveis(checkin, checkout);
     }
 }
