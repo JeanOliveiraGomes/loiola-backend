@@ -6,6 +6,6 @@ import com.tecgreen.loiola.entities.Quarto;
 public class QuartoParser {
 
     public static QuartoDTO toDTO(Quarto quarto) {
-        return new QuartoDTO(quarto.getId(), quarto.getDescricao(), quarto.getValor(), quarto.getQtdDisponiveis());
+        return new QuartoDTO(quarto.getId(), quarto.getDescricao(), quarto.getValor(), quarto.getQuantidade());
     }
 }
