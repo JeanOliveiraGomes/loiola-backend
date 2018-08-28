@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+	
+
 
     private AuthenticationManager authenticationManager;
     private JWTUtil jwtUtil;
@@ -45,8 +47,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         String username = ((UsuarioSecurity) authResult.getPrincipal()).getUsername();
         String token = jwtUtil.generateToken(username);
-        response.addHeader("Authorization", "Bearer " + token);
-        response.getWriter().write("Bearer" + token);
+        response.addHeader("Authorization","Bearer " + token);
+        response.getWriter().write("Bearer " +token);
     }
 
     private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
@@ -56,7 +58,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             response.setStatus(401);
             response.setContentType("application/json");
             response.getWriter().append(json());
+            
         }
+        
+        
 
         private String json() {
             long date = new Date().getTime();

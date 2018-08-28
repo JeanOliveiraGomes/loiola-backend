@@ -32,7 +32,7 @@ public class QuartoController {
     }
 
     @GetMapping(value = "disponiveis")
-    public ResponseEntity<List<QuartoDTO>> verificarDisponibilidade(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkin, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkout) {
+    public ResponseEntity<List<QuartoDTO>> verificarDisponibilidade(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate checkin, @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate checkout) {
         List<QuartoDTO> quartos = quartoService.buscarQuartosDisponiveis(checkin, checkout);
 
         return ResponseEntity.ok(quartos);
